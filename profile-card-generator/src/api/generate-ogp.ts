@@ -93,9 +93,9 @@ export default async function handler(
   // // レーダーチャートを描画
   // new Chart(radarCanvas as any, chartConfig);
 
-  // レーダーチャートをOGP画像に描画
-  const chartImage = await loadImage(radarCanvas.toDataURL());
-  ctx.drawImage(chartImage, 780, 115, 400, 400);
+  // // レーダーチャートをOGP画像に描画
+  // const chartImage = await loadImage(radarCanvas.toDataURL());
+  // ctx.drawImage(chartImage, 780, 115, 400, 400);
 
   // OGP画像をPNG形式で出力
   const imageBuffer = canvas.toBuffer("image/png");

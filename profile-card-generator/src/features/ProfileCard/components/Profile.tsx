@@ -11,6 +11,7 @@ import { Radar } from "react-chartjs-2";
 import html2canvas from "html2canvas";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import useGitHubUserData from "../hooks";
+import Image from "next/image";
 import {
   Chart as ChartJS,
   RadialLinearScale,
@@ -242,7 +243,7 @@ const Profile: React.FC = () => {
       {userData && (
         <>
           <div style={styles.card} ref={cardRef}>
-            <img
+            <Image
               src={userData.avatar_url}
               alt={userData.name}
               style={styles.avatar}
@@ -287,7 +288,7 @@ const Profile: React.FC = () => {
             }}
             ref={ogpRef}
           >
-            <img
+            <Image
               src={userData.avatar_url}
               alt={userData.name}
               style={{ ...styles.avatar, width: "150px" }}

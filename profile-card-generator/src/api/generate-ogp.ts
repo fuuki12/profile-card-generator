@@ -1,5 +1,5 @@
 import { createCanvas, loadImage } from "canvas";
-import { Chart, ChartConfiguration } from "chart.js";
+// import { Chart, ChartConfiguration } from "chart.js";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
@@ -51,47 +51,47 @@ export default async function handler(
   ctx.fillStyle = "#666";
   ctx.fillText(bio as string, 280, 350, 800); // 最大幅800px
 
-  // レーダーチャートの設定
-  const radarCanvas = createCanvas(400, 400);
-  const radarCtx = radarCanvas.getContext("2d");
+  // // レーダーチャートの設定
+  // const radarCanvas = createCanvas(400, 400);
+  // const radarCtx = radarCanvas.getContext("2d");
 
-  const chartConfig: ChartConfiguration = {
-    type: "radar",
-    data: {
-      labels: ["Repos", "Followers", "Following", "Gists"],
-      datasets: [
-        {
-          label: "GitHub Stats",
-          data: [repoCount, followerCount, followingCount, gistsCount],
-          backgroundColor: "rgba(255, 99, 132, 0.2)",
-          borderColor: "rgba(255, 99, 132, 1)",
-          borderWidth: 2,
-        },
-      ],
-    },
-    options: {
-      responsive: false,
-      scales: {
-        r: {
-          angleLines: {
-            display: false,
-          },
-          suggestedMin: 0,
-          suggestedMax:
-            Math.max(repoCount, followerCount, followingCount, gistsCount) *
-            1.2,
-        },
-      },
-      plugins: {
-        legend: {
-          display: false,
-        },
-      },
-    },
-  };
+  // const chartConfig: ChartConfiguration = {
+  //   type: "radar",
+  //   data: {
+  //     labels: ["Repos", "Followers", "Following", "Gists"],
+  //     datasets: [
+  //       {
+  //         label: "GitHub Stats",
+  //         data: [repoCount, followerCount, followingCount, gistsCount],
+  //         backgroundColor: "rgba(255, 99, 132, 0.2)",
+  //         borderColor: "rgba(255, 99, 132, 1)",
+  //         borderWidth: 2,
+  //       },
+  //     ],
+  //   },
+  //   options: {
+  //     responsive: false,
+  //     scales: {
+  //       r: {
+  //         angleLines: {
+  //           display: false,
+  //         },
+  //         suggestedMin: 0,
+  //         suggestedMax:
+  //           Math.max(repoCount, followerCount, followingCount, gistsCount) *
+  //           1.2,
+  //       },
+  //     },
+  //     plugins: {
+  //       legend: {
+  //         display: false,
+  //       },
+  //     },
+  //   },
+  // };
 
-  // レーダーチャートを描画
-  new Chart(radarCanvas as any, chartConfig);
+  // // レーダーチャートを描画
+  // new Chart(radarCanvas as any, chartConfig);
 
   // レーダーチャートをOGP画像に描画
   const chartImage = await loadImage(radarCanvas.toDataURL());

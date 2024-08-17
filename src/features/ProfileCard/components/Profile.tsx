@@ -164,7 +164,7 @@ const Profile: React.FC = () => {
           useCORS: true,
           width,
           height,
-          scale: 2, // Higher scale for better quality
+          scale: 2,
         });
         return canvas.toDataURL("image/png");
       }
@@ -215,7 +215,7 @@ const Profile: React.FC = () => {
 
   useEffect(() => {
     if (userData) {
-      setTimeout(generateEmbedCode, 500); // Increase delay to ensure chart renders fully
+      setTimeout(generateEmbedCode, 500);
     }
   }, [userData, generateEmbedCode]);
 
@@ -261,45 +261,6 @@ const Profile: React.FC = () => {
             <CopyToClipboard text={embedCode}>
               <button style={styles.copyButton}>Copy to Clipboard</button>
             </CopyToClipboard>
-          </div>
-          <button onClick={generateOGPImage} style={styles.ogpButton}>
-            Download OGP Image
-          </button>
-
-          <button onClick={generateOgpUrl} style={styles.ogpButton}>
-            Generate OGP URL
-          </button>
-
-          {ogpUrl && (
-            <div style={{ marginTop: "20px" }}>
-              <h3>OGP Image URL</h3>
-              <a href={ogpUrl} target="_blank" rel="noopener noreferrer">
-                {ogpUrl}
-              </a>
-            </div>
-          )}
-
-          <div
-            style={{
-              ...styles.card,
-              position: "absolute",
-              left: "-9999px",
-              top: "-9999px",
-            }}
-            ref={ogpRef}
-          >
-            <img
-              src={userData.avatar_url}
-              alt={userData.name}
-              style={{ ...styles.avatar, width: "150px" }}
-            />
-            <h2 style={{ ...styles.name, fontSize: "36px" }}>
-              {userData.name}
-            </h2>
-            <p style={{ ...styles.bio, fontSize: "20px" }}>{userData.bio}</p>
-            <div style={styles.radarChartContainer}>
-              <Radar data={radarData} options={{ responsive: true }} />
-            </div>
           </div>
         </>
       )}

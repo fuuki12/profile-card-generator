@@ -229,6 +229,7 @@ const Profile: React.FC = () => {
         style={styles.input}
       />
       <button
+        type="button"
         onClick={() => fetchUserData(username)}
         style={styles.input}
         disabled={isLoading}

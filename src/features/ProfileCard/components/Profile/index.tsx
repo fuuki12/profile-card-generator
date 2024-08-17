@@ -30,7 +30,6 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-
 const Profile: React.FC = () => {
   const [username, setUsername] = useState("");
   const [embedCode, setEmbedCode] = useState("");
@@ -60,21 +59,28 @@ const Profile: React.FC = () => {
     [userData]
   );
 
-  const captureCardAsImage = useCallback(async () => {
-    if (cardRef.current) {
-      const canvas = await html2canvas(cardRef.current, {
-        useCORS: true,
-        width: 460,
-        height: 708,
-        scale: 2,
-      });
-      return canvas.toDataURL("image/png");
-    }
-    return "";
-  }, []);
+  const captureCardAsImage = useCallback(
+    async (
+      ref: React.RefObject<HTMLDivElement>,
+      width: number,
+      height: number
+    ): Promise<string> => {
+      if (ref.current) {
+        const canvas = await html2canvas(ref.current, {
+          useCORS: true,
+          width,
+          height,
+          scale: 2,
+        });
+        return canvas.toDataURL("image/png");
+      }
+      return "";
+    },
+    []
+  );
 
   const generateEmbedCode = useCallback(async () => {
-    const base64Image = await captureCardAsImage();
+    const base64Image = await captureCardAsImage(cardRef, 460, 708);
     setEmbedCode(`
       <a href="https://github.com/${username}">
         <div style="width: 460px; padding: 20px; text-align: center; border: 1px solid #eaeaea; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
@@ -82,11 +88,11 @@ const Profile: React.FC = () => {
         </div>
       </a>
     `);
-  }, [username, captureCardAsImage]);
+  }, [captureCardAsImage]);
 
   useEffect(() => {
     if (userData) {
-      generateEmbedCode();
+      setTimeout(generateEmbedCode, 500);
     }
   }, [userData, generateEmbedCode]);
 

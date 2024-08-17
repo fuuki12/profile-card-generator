@@ -124,7 +124,6 @@ const styles = {
 
 const Profile: React.FC = () => {
   const [username, setUsername] = useState("");
-  const [ogpUrl, setOgpUrl] = useState("");
   const [embedCode, setEmbedCode] = useState("");
   const { fetchUserData, userData, isLoading, error } = useGitHubUserData();
   const cardRef = useRef<HTMLDivElement | null>(null);
@@ -176,9 +175,11 @@ const Profile: React.FC = () => {
   const generateEmbedCode = useCallback(async () => {
     const base64Image = await captureCardAsImage(cardRef, 460, 708);
     setEmbedCode(`
-      <div style="width: 460px; padding: 20px; text-align: center; border: 1px solid #eaeaea; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-        <img src="${base64Image}" alt="GitHub Profile Card" style="width: 100%;" />
-      </div>
+      <a href="https://github.com/${username}">
+        <div style="width: 460px; padding: 20px; text-align: center; border: 1px solid #eaeaea; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+          <img src="${base64Image}" alt="GitHub Profile Card" style="width: 100%;" />
+        </div>
+      </a>
     `);
   }, [captureCardAsImage]);
 
